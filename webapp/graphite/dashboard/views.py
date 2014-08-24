@@ -230,7 +230,7 @@ def save(request, name):
     dashboard = Dashboard.objects.create(name=name, state=state)
   else:
     dashboard.state = state
-    dashboard.save();
+    dashboard.save()
 
   return json_response( dict(success=True) )
 
@@ -249,7 +249,7 @@ def save_template(request, name, key):
     template.save()
   else:
     template.setState(state, key)
-    template.save();
+    template.save()
 
   return json_response( dict(success=True) )
 

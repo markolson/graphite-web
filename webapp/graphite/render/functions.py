@@ -1102,7 +1102,7 @@ def stacked(requestContext,seriesLists,stackName='__DEFAULT__'):
     totalStack = requestContext['totalStack'].get(stackName, [])
   else:
     requestContext['totalStack'] = {}
-    totalStack = [];
+    totalStack = []
   results = []
   for series in seriesLists:
     newValues = []
@@ -1694,7 +1694,7 @@ def averageOutsidePercentile(requestContext, seriesList, n):
     averages.append(safeDiv(safeSum(s), safeLen(s)))
 
   if n < 50:
-    n = 100 - n;
+    n = 100 - n
 
   lowPercentile = _getPercentile(averages, 100 - n)
   highPercentile = _getPercentile(averages, n)
