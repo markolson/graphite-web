@@ -1257,7 +1257,6 @@ def cactiStyle(requestContext, seriesList, system=None):
   maxLen = max([0] + [len(fmt(int(safeMax(series) or 3))) for series in seriesList]) + 3
   minLen = max([0] + [len(fmt(int(safeMin(series) or 3))) for series in seriesList]) + 3
   for series in seriesList:
-      name = series.name
       last = safeLast(series)
       maximum = safeMax(series)
       minimum = safeMin(series)
@@ -2049,7 +2048,6 @@ def _fetchWithBootstrap(requestContext, seriesList, **delta_kwargs):
 def _trimBootstrap(bootstrap, original):
   'Trim the bootstrap period off the front of this series so it matches the original'
   original_len = len(original)
-  bootstrap_len = len(bootstrap)
   length_limit = (original_len * original.step) / bootstrap.step
   trim_start = bootstrap.end - (length_limit * bootstrap.step)
   trimmed = TimeSeries(bootstrap.name, trim_start, bootstrap.end, bootstrap.step,
@@ -2078,7 +2076,6 @@ def holtWintersAnalysis(series):
   season_length = (24*60*60) / series.step
   intercept = 0
   slope = 0
-  pred = 0
   intercepts = list()
   slopes = list()
   seasonals = list()
@@ -2557,7 +2554,6 @@ def identity(requestContext, name):
   x(t) == t.
   """
   step = 60
-  delta = timedelta(seconds=step)
   start = int(time.mktime(requestContext["startTime"].timetuple()))
   end = int(time.mktime(requestContext["endTime"].timetuple()))
   values = range(start, end, step)
@@ -2926,7 +2922,6 @@ def hitcount(requestContext, seriesList, intervalString, alignToInterval = False
       series.step = newSeries.step
 
   for series in seriesList:
-    length = len(series)
     step = int(series.step)
     bucket_count = int(math.ceil(float(series.end - series.start) / interval))
     buckets = [[] for _ in range(bucket_count)]

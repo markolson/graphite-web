@@ -215,9 +215,6 @@ class FunctionsTest(TestCase):
         seriesList = self._generate_series_list()
 
         def verify_node_name(*nodes):
-            if isinstance(nodes, int):
-                node_number = [nodes]
-
             # Use deepcopy so the original seriesList is unmodified
             results = functions.aliasByNode({}, copy.deepcopy(seriesList), *nodes)
 

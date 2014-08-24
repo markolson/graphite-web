@@ -41,12 +41,10 @@ class IndexSearcher:
 
       branches = line.split('.')
       leaf = branches.pop()
-      parent = None
       cursor = tree
       for branch in branches:
         if branch not in cursor[1]:
           cursor[1][branch] = (None, {}) # (data, children)
-        parent = cursor
         cursor = cursor[1][branch]
 
       cursor[1][leaf] = (line, {})
@@ -62,7 +60,6 @@ class IndexSearcher:
     for result in self.subtree_query(self.tree, query_parts):
       # Overlay the query pattern on the resulting paths
       if keep_query_pattern:
-        path_parts = result['path'].split('.')
         result['path'] = '.'.join(query_parts) + result['path'][len(query_parts):]
 
       if result['path'] in metrics_found:

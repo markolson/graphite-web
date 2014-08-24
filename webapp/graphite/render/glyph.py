@@ -1585,7 +1585,6 @@ class PieGraph(Graph):
           label = "%.2f" % slice['value']
         else:
           label = str(int(slice['value']))
-      extents = self.getExtents(label)
       theta = slice['midAngle']
       x = self.x0 + (self.radius / 2.0 * math.cos(theta))
       y = self.y0 + (self.radius / 2.0 * math.sin(theta))
