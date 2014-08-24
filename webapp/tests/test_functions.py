@@ -15,6 +15,9 @@ def return_less(series, value):
 
 
 class FunctionsTest(TestCase):
+    def test_sum_series(self):
+        print functions.sumSeries({}, [])
+
     def test_highest_max(self):
         config = [20, 50, 30, 40]
         seriesList = [range(max_val) for max_val in config]
@@ -176,7 +179,7 @@ class FunctionsTest(TestCase):
         results = functions.transformNull({}, copy.deepcopy(seriesList), transform)
 
         for counter, series in enumerate(seriesList):
-            if not None in series:
+            if None not in series:
                 continue
             # If the None values weren't transformed, there is a problem
             self.assertNotIn(None, results[counter],
