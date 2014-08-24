@@ -2896,7 +2896,7 @@ def hitcount(requestContext, seriesList, intervalString, alignToInterval = False
       intervalCount = int((series.end - series.start) / interval)
       series[0:len(series)] = newSeries
       series.start = newSeries.start
-      series.end =  newSeries.start + (intervalCount * interval) + interval
+      series.end = newSeries.start + (intervalCount * interval) + interval
       series.step = newSeries.step
 
   for series in seriesList:

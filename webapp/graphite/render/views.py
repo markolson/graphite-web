@@ -359,7 +359,7 @@ def renderLocalView(request):
     graphClass = GraphTypes[graphType]
     options = unpickle.loads(optionsPickle)
     image = doImageRender(graphClass, options)
-    log.rendering("Delegated rendering request took %.6f seconds" % (time() -  start))
+    log.rendering("Delegated rendering request took %.6f seconds" % (time() - start))
     return buildResponse(image)
   except:
     log.exception("Exception in graphite.render.views.rawrender")
