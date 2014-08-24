@@ -135,8 +135,8 @@ class GraphError(Exception):
 
 
 class Graph:
-  customizable = ('width','height','margin','bgcolor','fgcolor', \
-                 'fontName','fontSize','fontBold','fontItalic', \
+  customizable = ('width','height','margin','bgcolor','fgcolor',
+                 'fontName','fontSize','fontBold','fontItalic',
                  'colorList','template','yAxisSide','outputFormat')
 
   def __init__(self,**params):
@@ -511,16 +511,16 @@ class Graph:
 
 class LineGraph(Graph):
   customizable = Graph.customizable + \
-                 ('title','vtitle','lineMode','lineWidth','hideLegend', \
-                  'hideAxes','minXStep','hideGrid','majorGridLineColor', \
-                  'minorGridLineColor','thickness','min','max', \
-                  'graphOnly','yMin','yMax','yLimit','yStep','areaMode', \
-                  'areaAlpha','drawNullAsZero','tz', 'yAxisSide','pieMode', \
-                  'yUnitSystem', 'logBase','yMinLeft','yMinRight','yMaxLeft', \
-                  'yMaxRight', 'yLimitLeft', 'yLimitRight', 'yStepLeft', \
-                  'yStepRight', 'rightWidth', 'rightColor', 'rightDashed', \
-                  'leftWidth', 'leftColor', 'leftDashed', 'xFormat', 'minorY', \
-                  'hideYAxis', 'uniqueLegend', 'vtitleRight', 'yDivisors', \
+                 ('title','vtitle','lineMode','lineWidth','hideLegend',
+                  'hideAxes','minXStep','hideGrid','majorGridLineColor',
+                  'minorGridLineColor','thickness','min','max',
+                  'graphOnly','yMin','yMax','yLimit','yStep','areaMode',
+                  'areaAlpha','drawNullAsZero','tz', 'yAxisSide','pieMode',
+                  'yUnitSystem', 'logBase','yMinLeft','yMinRight','yMaxLeft',
+                  'yMaxRight', 'yLimitLeft', 'yLimitRight', 'yStepLeft',
+                  'yStepRight', 'rightWidth', 'rightColor', 'rightDashed',
+                  'leftWidth', 'leftColor', 'leftDashed', 'xFormat', 'minorY',
+                  'hideYAxis', 'uniqueLegend', 'vtitleRight', 'yDivisors',
                   'connectedLimit')
   validLineModes = ('staircase','slope','connected')
   validAreaModes = ('none','first','all','stacked')

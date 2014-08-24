@@ -58,8 +58,8 @@ def index_json(request):
     return matches
   matches = []
   if cluster and len(settings.CLUSTER_SERVERS) > 1:
-    matches = reduce( lambda x, y: list(set(x + y)), \
-        [json.loads(urlopen("http://" + cluster_server + "/metrics/index.json").read()) \
+    matches = reduce( lambda x, y: list(set(x + y)),
+        [json.loads(urlopen("http://" + cluster_server + "/metrics/index.json").read())
         for cluster_server in settings.CLUSTER_SERVERS])
   else:
     matches = find_matches()

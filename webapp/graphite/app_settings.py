@@ -19,7 +19,7 @@ ADMINS = ()
 MANAGERS = ADMINS
 
 TEMPLATE_DIRS = (
-  join(dirname( abspath(__file__) ), 'templates'),
+  join(dirname(abspath(__file__)), 'templates'),
 )
 
 #Django settings below, do not touch!
