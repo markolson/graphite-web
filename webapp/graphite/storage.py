@@ -32,7 +32,6 @@ class Store:
     remote_hosts = [host for host in hosts if not is_local_interface(host)]
     self.remote_stores = [ RemoteStore(host) for host in remote_hosts ]
 
-
   def find(self, pattern, startTime=None, endTime=None, local=False):
     query = FindQuery(pattern, startTime, endTime)
 
@@ -138,7 +137,6 @@ class Store:
         yield LeafNode(path, reader)
 
 
-
 class FindQuery:
   def __init__(self, pattern, startTime, endTime):
     self.pattern = pattern
@@ -147,7 +145,6 @@ class FindQuery:
     self.isExact = is_pattern(pattern)
     self.interval = Interval(float('-inf') if startTime is None else startTime,
                              float('inf') if endTime is None else endTime)
-
 
   def __repr__(self):
     if self.startTime is None:

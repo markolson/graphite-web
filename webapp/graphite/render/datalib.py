@@ -29,17 +29,14 @@ class TimeSeries(list):
     self.valuesPerPoint = 1
     self.options = {}
 
-
   def __iter__(self):
     if self.valuesPerPoint > 1:
       return self.__consolidatingGenerator( list.__iter__(self) )
     else:
       return list.__iter__(self)
 
-
   def consolidate(self, valuesPerPoint):
     self.valuesPerPoint = int(valuesPerPoint)
-
 
   def __consolidatingGenerator(self, gen):
     buf = []
@@ -57,7 +54,6 @@ class TimeSeries(list):
     else: yield None
     raise StopIteration
 
-
   def __consolidate(self, values):
     usable = [v for v in values if v is not None]
     if not usable: return None
@@ -71,10 +67,8 @@ class TimeSeries(list):
       return min(usable)
     raise Exception("Invalid consolidation function!")
 
-
   def __repr__(self):
     return 'TimeSeries(name=%s, start=%s, end=%s, step=%s)' % (self.name, self.start, self.end, self.step)
-
 
   def getInfo(self):
     """Pickle-friendly representation of the series"""
@@ -85,7 +79,6 @@ class TimeSeries(list):
       'step' : self.step,
       'values' : list(self),
     }
-
 
 # Data retrieval API
 def fetchData(requestContext, pathExpr):

@@ -35,7 +35,6 @@ class Event(models.Model):
         if time_until is not None:
             query = query.filter(when__lte=time_until)
 
-
         result = list(query.order_by("when"))
         return result
 

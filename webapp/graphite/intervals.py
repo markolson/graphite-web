@@ -67,7 +67,6 @@ class IntervalSet:
     return IntervalSet( sorted(self.intervals + other.intervals) )
 
 
-
 class Interval:
   __slots__ = ('start', 'end', 'tuple', 'size')
 

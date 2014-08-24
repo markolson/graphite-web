@@ -2743,7 +2743,6 @@ def smartSummarize(requestContext, seriesList, intervalString, func='sum', align
       if value is not None:
         buckets[bucketInterval].append(value)
 
-
     newValues = []
     for timestamp_ in range(series.start, series.end, interval):
       bucketInterval = int((timestamp_ - series.start) / interval)

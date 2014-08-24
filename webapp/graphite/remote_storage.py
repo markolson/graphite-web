@@ -11,7 +11,6 @@ from graphite.logger import log
 from graphite.util import unpickle
 
 
-
 class RemoteStore(object):
   lastFailure = 0.0
   available = property(lambda self: time.time() - self.lastFailure > settings.REMOTE_RETRY_DELAY)
