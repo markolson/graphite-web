@@ -131,6 +131,9 @@ def formatPathExpressions(seriesList):
    [pathExpressions.append(s.pathExpression) for s in seriesList if not pathExpressions.count(s.pathExpression)]
    return ','.join(pathExpressions)
 
+def trimNodeName(name):
+  return name.split(',')[0].split(')')[0]
+
 # Series Functions
 
 #NOTE: Some of the functions below use izip, which may be problematic.
@@ -1140,7 +1143,7 @@ def aliasByMetric(requestContext, seriesList):
 
   """
   for series in seriesList:
-    series.name = series.name.split('.')[-1].split(',')[0]
+    series.name = trimNodeName(series.name.split('.')[-1])
   return seriesList
 
 def legendValue(requestContext, seriesList, *valueTypes):
@@ -2355,7 +2358,7 @@ def groupByNode(requestContext, seriesList, nodeNum, callback):
   metaSeries = {}
   keys = []
   for series in seriesList:
-    key = series.name.split(".")[nodeNum]
+    key = trimNodeName(series.name.split('.')[nodeNum])
     if key not in metaSeries.keys():
       metaSeries[key] = [series]
       keys.append(key)
