@@ -27,6 +27,12 @@ try:
 except ImportError:
   import pickle
 
+try:
+  from PIL import PngImagePlugin, Image
+  PNGEMBED_AVAILABLE = True
+except ImportError:
+  PNGEMBED_AVAILABLE = False
+
 from graphite.compat import HttpResponse
 from graphite.util import getProfileByUsername, json, unpickle
 from graphite.remote_storage import HTTPConnectionWithTimeout
@@ -409,17 +415,31 @@ def renderMyGraphView(request,username,graphName):
     url = graph.url
   return HttpResponseRedirect(url)
 
-
 def doImageRender(graphClass, graphOptions):
   pngData = StringIO()
   t = time()
   img = graphClass(**graphOptions)
   img.output(pngData)
+  if PNGEMBED_AVAILABLE:
+    imageData = addMetadata(pngData, graphOptions['data'])
+  else:
+    imageData = pngData.getvalue()
   log.rendering('Rendered PNG in %.6f seconds' % (time() - t))
-  imageData = pngData.getvalue()
-  pngData.close()
   return imageData
 
+def addMetadata(pngData, graphData):
+  pngData.seek(0)
+  ix = Image.open(pngData)
+  meta = PngImagePlugin.PngInfo()
+  for series in graphData:
+    timestamps = range(int(series.start), int(series.end) + 1, int(series.step))
+    datapoints = zip(series, timestamps)
+    meta.add_text("graphite::%s" % series.name, json.dumps(datapoints))
+  imageWithMeta = StringIO()
+  ix.save(imageWithMeta, "png", pnginfo=meta)
+  imageData = imageWithMeta.getvalue()
+  imageWithMeta.close()
+  return imageData
 
 def buildResponse(imageData, content_type="image/png"):
   return HttpResponse(imageData, content_type=content_type)
